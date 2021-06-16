@@ -1,0 +1,122 @@
+body {
+    display: relative;
+    background-image: url("images/background.png");
+    background-size:  cover;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 533px;
+    margin: auto;
+}
+
+h1 {
+    margin-top: 10px;
+    font-family: cursive;
+    color: ivory;
+    text-align: center;
+    font-size: 2.5rem;
+}
+
+.card {
+    width: 110px;
+    height: 110px;
+    margin: 5px;
+    border: 5px solid #a334a7;
+    border-radius: 5px;
+    transform-style: preserve-3d;
+    transition: transform 0.5s;
+    display: inline-block;
+    cursor: pointer;
+    background-color: transparent;
+    
+}
+
+.card:active {
+    transform: scale(0.95);
+    transition: transform 0.2s ease-in-out;
+}
+
+.front,
+.back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+}
+
+.flip {
+    transform: rotateY(180deg);
+    transition: transform 0.5s ;
+}
+
+footer {
+    background-image: linear-gradient(to right, #10111B, #161926);
+    color: white;
+    margin-top: 50px;
+    text-align: center;
+
+}
+
+.front {
+    transform: rotateY(180deg);
+}
+
+.game-over-section {
+    position: absolute;
+    top: 200px;
+    left: 20%;
+    right: 20%;
+    display: absolute;
+    padding: 100px auto;
+    min-width: 60%;
+    margin: auto;
+    background-color: #28252c;
+    border-radius: 25px;
+    opacity: 95%;
+    text-align: center;
+}
+
+h2 {
+    font-family: cursive;
+    font-size: 4rem;
+    color: #e00707;
+    text-shadow: 2px 0 whitesmoke;
+}
+
+p{
+    font-size: 1.5rem;
+    color: whitesmoke;
+}
+
+.final-score {
+    color: #a2eba0e1;
+    font-family: cursive;
+    font-size: 1.6rem;
+    text-shadow: 2px 2px 10px #00fff2, 0 0 6px #ff0000  ;
+
+}
+
+.replay-btn {
+    background-image: linear-gradient(to right, #1dc033 , #0bee84);
+    color: #065050;
+    border-radius: 20px;
+    font-weight: bold;
+    font-family: cursive;
+    font-size: 1.5rem;
+    min-height: 50px;
+    min-width: 120px;
+    margin: 50px auto;
+    cursor: pointer;
+    
+}
+
+.replay-btn:active {
+    min-height: 48px;
+    min-width: 110px;
+}
+
+.glow-card {
+    box-shadow: 5px 5px 20px greenyellow;
+}
