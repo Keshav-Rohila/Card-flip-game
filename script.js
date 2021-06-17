@@ -25,6 +25,7 @@ function flip() {
     if (firstFlip) {
         firstFlip = false;
         firstCard = this;
+        this.removeEventListener("click", flip);
     }else {
         secondCard = this;
 
@@ -41,13 +42,13 @@ const checkIt = () => {
 };
 
 const success = () => {                                               
-    firstCard.removeEventListener("click", flip);
+    // firstCard.removeEventListener("click", flip);
     secondCard.removeEventListener("click", flip);
         setTimeout(() => {                                           
             firstCard.classList.add("glow-card");
             secondCard.classList.add("glow-card");
             successSound.play();
-        }, 350);
+        }, 100);
         
         setTimeout(()  => {                                          
             firstCard.classList.remove("glow-card");
@@ -60,7 +61,7 @@ const success = () => {
     if (totalMatchedCards === 8){
         setTimeout(() => {
             gameOver();
-        },1000);
+        },800);
     }
 };
 
@@ -69,12 +70,13 @@ const fail = () => {
     failToMatch++;
     setTimeout(() => {
         failSound.play();    
-    }, 350);
+    }, 300);
     setTimeout(() => {
         firstCard.classList.remove("flip");
         secondCard.classList.remove("flip");
+        firstCard.addEventListener("click", flip);
         reset();
-    }, 1000 )
+    }, 700);
     
 };
 
