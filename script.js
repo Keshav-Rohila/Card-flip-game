@@ -1,5 +1,4 @@
 const cards = document.querySelectorAll(".card");
-console.log(cards);
 
 // variables
 const clickSound = new Audio("sounds/mouse-click.mp3");
@@ -11,9 +10,13 @@ var score = 0;
 var clicks = 0;
 var totalMatchedCards = 0;
 var failToMatch = 0;
-var firstFlip = true;
-var firstCard = null;
-var secondCard = null;
+var flipCount = 1;
+var card_1 = null;
+var card_2 = null;
+var card_3 = null;
+var card_4 = null;
+var check = 1;
+
 
 cards.forEach((card) => card.addEventListener("click", flip));
 
@@ -22,73 +25,116 @@ function flip() {
     clicks++;
     this.classList.add("flip");
 
-    if (firstFlip) {
-        firstFlip = false;
-        firstCard = this;
+    if (flipCount === 1) {
+        flipCount++;
+        card_1 = this;
         this.removeEventListener("click", flip);
-    }else {
-        secondCard = this;
+    }else if (flipCount === 2) {
+        flipCount++;
+        card_2 = this;
+
+        checkIt();
+    }else if (flipCount === 3){
+        flipCount++;
+        card_3 = this;
+        this.removeEventListener("click", flip);
+
+    }else if (flipCount === 4){
+        flipCount = 1;
+        card_4 = this;
 
         checkIt();
     }
 };
 
 const checkIt = () => {
-    if(firstCard.dataset.image === secondCard.dataset.image){
-        success();
-    }else {
-        fail();
+    if (check === 1){
+        check++;
+        if(card_1.dataset.image === card_2.dataset.image){
+            success();
+        }else {
+            fail();
+        }
+    }else if (check === 2){
+        check = 1;
+        if(card_3.dataset.image === card_4.dataset.image){
+            success();
+        }else {
+            fail();
+        }
     }
 };
 
-const success = () => {                                               
-    // firstCard.removeEventListener("click", flip);
-    secondCard.removeEventListener("click", flip);
+const success = () => {
+    if (check === 2){
+        card_2.removeEventListener("click", flip);
         setTimeout(() => {                                           
-            firstCard.classList.add("glow-card");
-            secondCard.classList.add("glow-card");
+            card_1.classList.add("glow-card");
+            card_2.classList.add("glow-card");
             successSound.play();
         }, 100);
         
         setTimeout(()  => {                                          
-            firstCard.classList.remove("glow-card");
-            secondCard.classList.remove("glow-card");
-            reset(); 
+            card_1.classList.remove("glow-card");
+            card_2.classList.remove("glow-card"); 
         },1000)
 
-    totalMatchedCards++;
-    score += 60;
-    if (totalMatchedCards === 8){
-        setTimeout(() => {
-            gameOver();
-        },800);
+        totalMatchedCards++;
+        score += 60;
+        if (totalMatchedCards === 8){
+            setTimeout(() => {
+                gameOver();
+            },800);
+        }
+    }else if (check === 1) {
+        card_4.removeEventListener("click", flip);
+        setTimeout(() => {                                           
+            card_3.classList.add("glow-card");
+            card_4.classList.add("glow-card");
+            successSound.play();
+        }, 100);
+        
+        setTimeout(()  => {                                          
+            card_3.classList.remove("glow-card");
+            card_4.classList.remove("glow-card"); 
+        },1000)
+
+        totalMatchedCards++;
+        score += 60;
+        if (totalMatchedCards === 8){
+            setTimeout(() => {
+                gameOver();
+            },800);
+        }
     }
 };
 
 const fail = () => {
-    console.log("fail");
-    failToMatch++;
-    setTimeout(() => {
-        failSound.play();    
-    }, 300);
-    setTimeout(() => {
-        firstCard.classList.remove("flip");
-        secondCard.classList.remove("flip");
-        firstCard.addEventListener("click", flip);
-        reset();
-    }, 700);
+    if (check === 2){
+        failToMatch++;
+        setTimeout(() => {
+            failSound.play();    
+        }, 300);
+        setTimeout(() => {
+            card_1.classList.remove("flip");
+            card_2.classList.remove("flip");
+            card_1.addEventListener("click", flip);
+        }, 700);
+    }else if(check === 1){
+        failToMatch++;
+        setTimeout(() => {
+            failSound.play();    
+        }, 300);
+        setTimeout(() => {
+            card_3.classList.remove("flip");
+            card_4.classList.remove("flip");
+            card_3.addEventListener("click", flip);
+        }, 700);
+    }
     
 };
 
-const reset = () => {
-    console.log("reset");
-    firstFlip = true;
-    firstCard = null;
-    secondCard = null;
-};
-
 const gameOver = () => {
-    console.log("game over");
     
     gameOverSound.play();
 
@@ -131,7 +177,7 @@ const gameOver = () => {
                 count++;
                 span.innerText = count;
             }
-        }, 7);
+        }, (2700/finalScore));
     }, 600);
 }
 
