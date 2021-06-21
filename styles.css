@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    height: 100vh;
+    height: calc(100vh - 200px);
     display: flex;
     flex-direction: column;
     align-content: space-around;
@@ -22,7 +22,7 @@ h1 {
     font-family: 'Fira Sans Condensed', sans-serif;
     color: ivory;
     text-align: center;
-    font-size: 2.5rem;
+    font-size: 2.7rem;
 }
 
 .card {
