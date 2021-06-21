@@ -1,13 +1,18 @@
 body {
-    display: relative;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
     background-image: url("images/background.png");
     background-size:  cover;
 }
 
 .container {
-    display: flex;
+    display: inline-flex;
     flex-wrap: wrap;
-    max-width: 533px;
+    max-width: 530px;
+    justify-content: space-between;
     margin: auto;
 }
 
