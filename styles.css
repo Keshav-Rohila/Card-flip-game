@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    height: calc(100vh - 200px);
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-content: space-around;
@@ -17,7 +17,7 @@ body {
 }
 
 h1 {
-    margin-top: 5vh;
+    margin-top: 7vh;
     margin-bottom: 0;
     font-family: 'Fira Sans Condensed', sans-serif;
     color: ivory;
@@ -60,7 +60,7 @@ h1 {
 footer {
     background-image: linear-gradient(to right, #10111B, #161926);
     color: white;
-    margin-bottom: 5vh;
+    margin-bottom: 2vh;
     text-align: center;
 
 }
